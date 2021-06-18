@@ -35,3 +35,29 @@ Your Pages site will use the layout and styles from the Jekyll theme you have se
 ### Support or Contact
 
 Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+
+# Load the library
+require 'google-image-charts.rb'
+
+# Populate the chart details
+chartDetails = {
+	:title 	=> "Test chart",
+	:height => 250,
+	:width 	=> 400,
+	:data	=> [[4,5,10,6,2,9], [2,2,12,9,11,1]], # Array of data arrays (one for each line)
+	:labels	=> ["Series 1", "Series 2"]
+}
+
+# Create the chart
+lineGraph = GoogleImageCharts::LineGraph.new(chartDetails)
+
+# Use it!
+chartUrl = lineGraph.chart_url
+# => "http://chart.apis.google.com/chart?cht=lc&chs=400x250&chd=t:4,5,10,6,2,9%7C2,2,12,9,11,1&chdl=Series%201%7CSeries%202&chdlp=b&chtt=Test%20chart&chco=a&chds=a&chxt=x,y"
+
+imageTag = lineGraph.html_img_tag
+# => "<img src='http://chart.apis.google.com/chart?cht=lc&chs=400x250&chd=t:4,5,10,6,2,9%7C2,2,12,9,11,1&chdl=Series%201%7CSeries%202&chdlp=b&chtt=Test%20chart&chco=a&chds=a&chxt=x,ycht=lc&chs=400x250&chd=t:4,5,10,6,2,9%7C2,2,12,9,11,1&chdl=Series%201%7CSeries%202&chdlp=b&chtt=Test%20chart&chco=a&chds=a&chxt=x,y' alt='Test chart' height='250' width='400' />"
+
+# Make it prettier
+lineGraph.chartColors = ["5CB8E6","E68A00"]
+	
